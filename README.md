@@ -95,4 +95,6 @@ Our vision is to create a fair and democratic funding ecosystem that:
 - **Web3 Integration**: Ethers.js
 - **Blockchain**: Ethereum (compatible with EVM chains)
 - **Development**: Hardhat/Truffle for testing and deployment
+
+0x693409a4f7e8c0e57453d68f4253950409897254cea0fa85c0e9385f17988b82
 <img width="1920" height="1080" alt="Screenshot (1)" src="https://github.com/user-attachments/assets/e1ca495a-14c3-4d60-8de1-acc1b78dfa7b" />
