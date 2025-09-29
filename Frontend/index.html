@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quadratic Funding Platform</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ethers/6.7.1/ethers.umd.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🌟 Quadratic Funding Platform</h1>
+            <p>Democratic funding for public goods projects</p>
+            <div class="wallet-info">
+                <button id="connectWallet" class="btn btn-primary">Connect Wallet</button>
+                <div id="accountInfo" class="account-info hidden">
+                    <span id="accountAddress"></span>
+                    <span id="accountBalance"></span>
+                </div>
+            </div>
+        </header>
+
+        <main>
+            <!-- Contract Status -->
+            <section class="contract-status">
+                <div class="status-card">
+                    <h3>Contract Status</h3>
+                    <div class="status-grid">
+                        <div class="status-item">
+                            <span class="label">Total Projects:</span>
+                            <span id="totalProjects">0</span>
+                        </div>
+                        <div class="status-item">
+                            <span class="label">Matching Pool:</span>
+                            <span id="matchingPool">0 ETH</span>
+                        </div>
+                        <div class="status-item">
+                            <span class="label">Contract Address:</span>
+                            <span id="contractAddress">Not connected</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Create Project -->
+            <section class="create-project">
+                <div class="card">
+                    <h2>🚀 Create New Project</h2>
+                    <form id="createProjectForm">
+                        <div class="form-group">
+                            <label for="projectName">Project Name</label>
+                            <input type="text" id="projectName" placeholder="Enter project name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="projectDescription">Project Description</label>
+                            <textarea id="projectDescription" placeholder="Describe your project and its impact" required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-success">Create Project</button>
+                    </form>
+                </div>
+            </section>
+
+            <!-- Project List -->
+            <section class="projects">
+                <div class="projects-header">
+                    <h2>💡 Active Projects</h2>
+                    <button id="refreshProjects" class="btn btn-secondary">Refresh</button>
+                </div>
+                <div id="projectsList" class="projects-grid">
+                    <!-- Projects will be loaded here -->
+                </div>
+            </section>
+
+            <!-- Contribute to Project -->
+            <section class="contribute">
+                <div class="card">
+                    <h2>💰 Contribute to Project</h2>
+                    <form id="contributeForm">
+                        <div class="form-group">
+                            <label for="projectId">Project ID</label>
+                            <input type="number" id="projectId" placeholder="Enter project ID" required min="1">
+                        </div>
+                        <div class="form-group">
+                            <label for="contributionAmount">Contribution Amount (ETH)</label>
+                            <input type="number" id="contributionAmount" placeholder="0.01" step="0.001" min="0.001" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Contribute</button>
+                    </form>
+                </div>
+            </section>
+
+            <!-- Admin Panel -->
+            <section class="admin-panel" id="adminPanel" style="display: none;">
+                <div class="card admin-card">
+                    <h2>🔧 Admin Panel</h2>
+                    <div class="admin-actions">
+                        <div class="form-group">
+                            <label for="matchingPoolAmount">Add to Matching Pool (ETH)</label>
+                            <div class="input-button-group">
+                                <input type="number" id="matchingPoolAmount" placeholder="1.0" step="0.1" min="0.1">
+                                <button id="addMatchingPool" class="btn btn-warning">Add Funds</button>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="distributeProjectId">Distribute Matching Funds</label>
+                            <div class="input-button-group">
+                                <input type="number" id="distributeProjectId" placeholder="Project ID" min="1">
+                                <button id="distributeFunds" class="btn btn-danger">Distribute</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Loading Overlay -->
+        <div id="loadingOverlay" class="loading-overlay hidden">
+            <div class="loading-spinner"></div>
+            <p>Processing transaction...</p>
+        </div>
+
+        <!-- Toast Notifications -->
+        <div id="toastContainer" class="toast-container"></div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
