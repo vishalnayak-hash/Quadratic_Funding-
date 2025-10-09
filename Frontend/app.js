@@ -46,23 +46,31 @@ contract QuadraticFunding {
         admin = msg.sender;
     }
     
-    // Core Function 1: Create a new project for funding
-    function createProject(string memory _name, string memory _description) external {
-        require(bytes(_name).length > 0, "Project name cannot be empty");
-        require(bytes(_description).length > 0, "Project description cannot be empty");
-        
-        projectCount++;
-        Project storage newProject = projects[projectCount];
-        newProject.id = projectCount;
-        newProject.name = _name;
-        newProject.description = _description;
-        newProject.creator = payable(msg.sender);
-        newProject.totalFunding = 0;
-        newProject.contributorCount = 0;
-        newProject.isActive = true;
-        
-        emit ProjectCreated(projectCount, _name, msg.sender);
-    }
+// Core Function 1: Create a new project for funding
+function createProject(string memory _name, string memory _description) external {
+    // Ensure project name is not empty
+    require(bytes(_name).length > 0, "Project name cannot be empty");
+
+    // Ensure project description is not empty
+    require(bytes(_description).length > 0, "Project description cannot be empty");
+
+    // Increment the total project count
+    projectCount++;
+
+    // Create and initialize a new project
+    Project storage newProject = projects[projectCount];
+    newProject.id = projectCount;
+    newProject.name = _name;
+    newProject.description = _description;
+    newProject.creator = payable(msg.sender);
+    newProject.totalFunding = 0;
+    newProject.contributorCount = 0;
+    newProject.isActive = true;
+
+    // Emit an event to log project creation on-chain
+    emit ProjectCreated(projectCount, _name, msg.sender);
+}
+
     
     // Core Function 2: Contribute to a project
     function contributeToProject(uint256 _projectId) external payable projectExists(_projectId) {
